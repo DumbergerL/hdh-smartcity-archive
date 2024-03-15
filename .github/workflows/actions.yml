@@ -25,15 +25,10 @@ jobs:
           SOME_SECRET: ${{ secrets.SOME_SECRET }}
         run: python src/collect-traffic-data.py
 
-      - name: commit files
-        run: |
-          git config --local user.email "data-scientist@lukasdumberger.de"
-          git config --local user.name "Data Steward"
-          git add -A
-          git diff-index --quiet HEAD || (git commit -a -m "add data" --allow-empty)
-
-      - name: push changes
-        uses: ad-m/github-push-action@v0.6.0
+      - name: Commit data
+        uses: EndBug/add-and-commit@v9
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main 
+          add: 'data'
+          author_name: 'Data Steward'
+          author_email: 'datascience@lukasdumberger.de'
+          message: 'feat(data): add traffic data'
