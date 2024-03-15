@@ -28,7 +28,7 @@ jobs:
       - name: Commit data
         uses: EndBug/add-and-commit@v9
         with:
-          add: 'data/*'
+          add: '*'
           author_name: 'Data Steward'
           author_email: 'datascience@lukasdumberger.de'
           message: 'feat(data): add traffic data'
