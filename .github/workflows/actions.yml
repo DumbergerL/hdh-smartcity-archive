@@ -28,10 +28,15 @@ jobs:
       - name: Show data content
         run: ls && cd data && echo "Data:\n" && ls
 
-      - name: Commit data
-        uses: EndBug/add-and-commit@v9
+      - name: commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          git diff-index --quiet HEAD || (git commit -a -m "updated data" --allow-empty)
+
+      - name: push changes
+        uses: ad-m/github-push-action@v0.6.0
         with:
-          author_name: 'Data Steward'
-          author_email: 'datascience@lukasdumberger.de'
-          message: 'feat(data): add traffic data'
-          add: '*.json'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main 
