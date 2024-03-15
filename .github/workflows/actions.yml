@@ -25,6 +25,9 @@ jobs:
           SOME_SECRET: ${{ secrets.SOME_SECRET }}
         run: python src/collect-traffic-data.py
 
+      - name: Show data content
+        run: ls && cd data && echo "Data:\n" && ls
+
       - name: Commit data
         uses: EndBug/add-and-commit@v9
         with:
